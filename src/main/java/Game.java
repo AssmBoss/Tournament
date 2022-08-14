@@ -1,18 +1,20 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Game {
-    private ArrayList<Player> playerList = new ArrayList<Player>();
+    //private ArrayList<Player> playerList = new ArrayList<Player>();
+    HashMap<String, Integer> playerMap = new HashMap<>();
 
     public void register(Player player) {
-        playerList.add(player);
+        playerMap.put(player.getName(), player.getStrength());
     }
 
     public int strenghtByName(String name) {
-        for (Player player : playerList) {
-            if (player.getName() == name) {
-                return player.getStrength();
-            }
+
+        if (playerMap.containsKey(name)) {
+            return playerMap.get(name);
         }
+
         throw new NotRegisteredException("Player with name: " + name + " is not registered!");
     }
 
